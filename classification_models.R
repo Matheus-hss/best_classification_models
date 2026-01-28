@@ -93,14 +93,6 @@ ada_c50_model <- decision_tree() |>
   set_engine("C5.0", trials = 100) |>    # trials = boosting rounds
   set_mode("classification")
 
-#Gradient Boosting (GBM) -> FALHOU!
-#gbm_model <- boost_tree(trees = 500) %>%
-#  set_engine("mboost") %>%
-#  set_mode("classification")
-#tidymodels/parsnip, o modelo boost_tree() não tem engines disponíveis para classificação além do xgboost
-#parsnip NÃO oferece um “GBM clássico” plug-and-play do tipo gbm/mboost para classificação
-#Irei rodar o LightGBM fora da estrutura do Tidymodels
-
 #XGBoost
 xgb_model <- boost_tree(
   trees = 800,
@@ -543,4 +535,5 @@ gain_curve(pred_test_final, truth = churn, .pred_Yes) |>  autoplot()
 # 
 # 🟨 4. Falsos Positivos (FP) = 172
 # Clientes que não churnaram, mas o modelo previu “Yes”.
+
 # Esse número é baixo, o que é ótimo para evitar ações desnecessárias (ex.: oferecer desconto para quem não ia sair).
